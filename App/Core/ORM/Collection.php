@@ -26,4 +26,14 @@ class Collection
     {
         return count($this->items);
     }
+
+    public function first()
+    {
+        return $this->items[0];
+    }
+
+    public function last()
+    {
+        return $this->items[$this->count() - 1];
+    }
 }

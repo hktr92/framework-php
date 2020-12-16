@@ -325,11 +325,15 @@ abstract class Model extends Database
      * @param string $class The class for the relationship
      * @param string $localColumn
      *
-     * @return \App\Core\Model
+     * @return \App\Core\Model|null
      */
-    public function oneToOne(string $class, string $localColumn): Model
+    public function oneToOne(string $class, string $localColumn): ?Model
     {
         $foreignClass = new $class();
-        return $foreignClass->find($this->{$localColumn});
+        try {
+            return $foreignClass->find($this->{$localColumn});
+        } catch (\InvalidArgumentException) {
+            return null;
+        }
     }
 }

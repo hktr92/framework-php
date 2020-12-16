@@ -26,3 +26,16 @@ routes:
     method: POST
     controller: App\Http\Controllers\LoginController
     action: login
+
+  logout:
+    url: /logout
+    method: POST
+    controller: App\Http\Controllers\LoginController
+    action: logout
+
+  dashboard-view:
+    url: /dashboard
+    method: GET
+    controller: App\Http\Controllers\DashboardController
+    middleware: App\Http\Middleware\AuthMiddleware
+    action: dashboardView
