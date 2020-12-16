@@ -4,3 +4,25 @@ routes:
     method: GET
     controller: App\Http\Controllers\HomeController
     action: homeView
+
+  register-view:
+    url: /register
+    method: GET
+    controller: App\Http\Controllers\RegisterController
+    action: registerView
+  register-form:
+    url: /register
+    method: POST
+    controller: App\Http\Controllers\RegisterController
+    action: register
+
+  login-view:
+    url: /login
+    method: GET
+    controller: App\Http\Controllers\LoginController
+    action: loginView
+  login-form:
+    url: /login
+    method: POST
+    controller: App\Http\Controllers\LoginController
+    action: login

@@ -3,8 +3,9 @@
 namespace App\Http\Model;
 
 use App\Core\Model;
+use App\Core\ORM\Collection;
 
-class Test extends Model
+class User extends Model
 {
     protected string $tableName = 'users';
     protected string $primaryKey = 'id';
@@ -13,5 +14,9 @@ class Test extends Model
     public $username;
     public $email;
     public $password;
-    public $activated;
+
+    public function sessions(): Collection
+    {
+        return $this->oneToMany(Session::class, 'user_id', 'id');
+    }
 }
