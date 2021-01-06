@@ -20,7 +20,15 @@ class Auth extends CommandController
             'model' => $basePath . 'Model' . DIRECTORY_SEPARATOR,
             'middleware' => $basePath . 'Middleware' . DIRECTORY_SEPARATOR,
             'migration' => $basePath . 'Migration' . DIRECTORY_SEPARATOR,
-            'view' => $basePath . 'View' . DIRECTORY_SEPARATOR,
+            'view' => $basePath . 'Templates' . DIRECTORY_SEPARATOR,
+        ];
+
+        $fileType = [
+            'controller' => '.php',
+            'model' => '.php',
+            'middleware' => '.php',
+            'migration' => '',
+            'view' => ''
         ];
 
         $httpBasePath = 'App' . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR;
@@ -55,10 +63,8 @@ class Auth extends CommandController
         }
 
         foreach ($writeToPaths as $path) {
-            if (!is_dir($path)) {
-                if (!mkdir($path)) {
-                    throw new \RuntimeException(sprintf('Directory "%s" was not created', $path));
-                }
+            if (! mkdir($path) && ! is_dir($path)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $path));
             }
         }
 
@@ -99,7 +105,7 @@ class Auth extends CommandController
         foreach ($contents as $type => $content) {
             foreach ($content as $file) {
                 $file_content = file_get_contents($paths[$type] . $file);
-                $file = $writeToPaths[$type] . $file;
+                $file = $writeToPaths[$type] . $file . $fileType[$type];
 
                 if (file_exists($file)) {
                     $printer->display('[✘] ', 'red');
